@@ -1,24 +1,28 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Switch, Route } from 'react-router-dom';
+
+import Navbar from './components/Navbar/Navbar';
+import Home from './pages/Home';
+import Basket from './pages/Basket';
+import Products from './pages/Products';
+import ProductDetails from './pages/ProductDetails';
+import ErrorPage from './pages/ErrorPage';
+import Modal from './components/Modal';
+
+import './css/main.css';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="wrapper">
+      <Navbar />
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route exact path="/cart" component={Basket} />
+        <Route exact path="/products" component={Products} />
+        <Route exact path="/products/:id" component={ProductDetails} />
+        <Route path="*" component={ErrorPage} />
+      </Switch>
+      <Modal />
     </div>
   );
 }

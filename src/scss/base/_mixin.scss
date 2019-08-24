@@ -1,0 +1,40 @@
+$breakpoints: (
+  small: (min-width: 640px),
+  medium: (min-width: 768px),
+  large: (min-width: 991px),
+  xlarge: (min-width: 1200px),
+);
+
+@mixin pseudo($content: '', $display: block) {
+  content: $content;
+  display: $display;  
+}
+
+@mixin position($type: absolute, $top: null, $left: null, $right: null, $bottom: null){
+  position: $type;
+  top: $top;
+  left: $left;
+  right: $right;
+  bottom: $bottom;
+}
+
+@mixin flex($direction: row, $justify-content: flex-start, $align-items: stretch){
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify-content;
+  align-items: $align-items;
+}
+
+
+
+@mixin media-q($breakpoint){
+  $size: map-get($breakpoints, $breakpoint);
+  @if($size){
+    @media #{$size} {
+      @content;
+    }
+  }@else {
+    @error '#{$breakpoint} - nie rozpoznaję tej wartości'
+  }
+}
+

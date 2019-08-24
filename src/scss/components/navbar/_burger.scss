@@ -1,0 +1,18 @@
+.burger {
+  cursor: pointer;
+  overflow: hidden;
+  z-index: 1001;
+
+  &__item, &::after, &::before {
+    width: 20px;
+    height: 3px;
+    background-color: $color-dark; 
+    margin: 3px;
+  }
+
+  &::after, &::before {
+    @include pseudo;
+    width: 30px;
+  }
+
+}

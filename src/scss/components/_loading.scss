@@ -1,0 +1,13 @@
+.loading {
+  margin: 30px 10px;
+  
+  &__title {
+    font-size: 1.8rem;
+    text-align: center;
+  }
+
+  &__img-container {
+    width: 100%;
+    text-align: center;
+  }
+}

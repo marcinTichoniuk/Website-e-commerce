@@ -1,0 +1,18 @@
+.column {
+  display: none;
+  @include media-q(medium){
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 20px 0;
+  }
+
+  &__product {
+    flex-basis: 20%;
+  }
+
+  &__title {
+    font-size: 1.8rem;
+  }
+
+}

@@ -1,0 +1,48 @@
+.services {
+  padding: 25px 50px;
+  @include media-q(large){
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__item {
+    padding: 20px 0;
+    text-align: center;
+    @include media-q(small){
+      width: 50%;
+      margin: 0 auto;
+    }
+    @include media-q(large){
+      width: 35%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+
+  &__icon {
+    font-size: 5rem;
+    margin: 20px 0;
+  }
+
+  &__text {
+    line-height: 150%;
+    font-size: 1.5rem;
+    @include media-q(large){
+      width: 60%;
+    }
+  }
+
+  &__slogan {
+    letter-spacing: 3px;
+    margin: 15px 0;
+    font-weight: normal;
+    text-transform: uppercase;
+    font-size: 1.5rem;
+    @include media-q(large){
+      flex-grow: 1;
+      display: flex;
+      align-items: flex-end;
+    }
+  }
+}

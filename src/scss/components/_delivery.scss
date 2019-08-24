@@ -1,0 +1,31 @@
+.delivery {
+  padding: 40px 25px;
+  @include media-q(medium){
+    display: flex;
+    align-items: center;
+  }
+
+  &__img-container {
+    width: 100%;
+    text-align: center;
+  }
+
+  &__img {
+    max-width: 100%;
+    @include media-q(small){
+      max-width: 75%;
+    }
+  }
+
+  &__text {
+    line-height: 140%;
+    margin: 20px 0 10px;
+    text-align: justify;
+    font-size: 1.5rem;
+    @include media-q(small){
+      width: 75%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+}
