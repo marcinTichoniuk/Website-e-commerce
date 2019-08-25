@@ -72,7 +72,7 @@ export const storeProducts = [
   },
   {
     id: 6,
-    name: "Wizard Robe",
+    name: "Wizard Robe - Long Grey",
     img: img6,
     price: 33,
     company: "Wizard Co",
