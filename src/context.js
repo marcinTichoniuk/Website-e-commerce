@@ -17,7 +17,7 @@ class StoreProvider extends Component {
 
   // set initial value
   componentDidMount() {
-    const products = storeProducts;
+    const products = [...storeProducts];
     this.setState({
       products,
       loading: false,
@@ -26,14 +26,18 @@ class StoreProvider extends Component {
 
   // add products to cart
   addToCart = id => {
+    const product = this.state.products.find(prod => prod.id === id);
+    const copyProduct = { ...product };
+    copyProduct.inCart = true;
+    copyProduct.count = 1;
+    copyProduct.totalCost = copyProduct.price;
+
     const newProducts = this.state.products.map(product => {
       if (product.id === id) {
-        product.inCart = true;
-        product.count = 1;
-        product.totalCost = product.price;
+        product = copyProduct;
       }
       return product;
-    })
+    });
 
     const newCart = newProducts.filter(product => product.inCart);
 
@@ -45,7 +49,7 @@ class StoreProvider extends Component {
 
   // open modal - need info about product and change state
   openModal = id => {
-    const modalProduct = [...this.state.products].find(product => product.id === id);
+    const modalProduct = this.state.products.find(product => product.id === id);
     this.setState({
       modalOpen: true,
       modalProduct,
@@ -59,21 +63,26 @@ class StoreProvider extends Component {
   }
 
   getProduct = name => {
-    const product = [...this.state.products].find(product => product.name === name);
+    const product = this.state.products.find(product => product.name === name);
     return product;
   }
 
   // remove product from cart and change properties in original array (products)
   removeProduct = id => {
     const cart = this.state.cart.filter(product => product.id !== id);
+
+    const product = this.state.products.find(prod => prod.id === id);
+    const copyProduct = { ...product };
+    copyProduct.inCart = false;
+    copyProduct.count = 0;
+    copyProduct.totalCost = 0;
+
     const products = this.state.products.map(product => {
       if (product.id === id) {
-        product.inCart = false;
-        product.count = 0;
-        product.totalCost = 0;
+        product = copyProduct;
       }
       return product;
-    })
+    });
 
     this.setState({
       products,
@@ -82,10 +91,14 @@ class StoreProvider extends Component {
   }
 
   increment = id => {
+    const product = this.state.cart.find(prod => prod.id === id);
+    const copyProduct = { ...product };
+    copyProduct.count = copyProduct.count + 1;
+    copyProduct.totalCost = copyProduct.count * copyProduct.price;
+
     const cart = this.state.cart.map(product => {
       if (product.id === id) {
-        product.count = product.count + 1;
-        product.totalCost = product.count * product.price;
+        product = copyProduct;
       }
       return product;
     })
@@ -96,11 +109,15 @@ class StoreProvider extends Component {
   }
 
   decrement = id => {
+    const product = this.state.cart.find(prod => prod.id === id);
+    const copyProduct = { ...product };
+    copyProduct.count = copyProduct.count - 1;
+    if (copyProduct.count < 1) copyProduct.count = 1;
+    copyProduct.totalCost = copyProduct.count * copyProduct.price;
+
     const cart = this.state.cart.map(product => {
       if (product.id === id) {
-        product.count = product.count - 1;
-        if (product.count < 1) product.count = 1;
-        product.totalCost = product.count * product.price;
+        product = copyProduct;
       }
       return product;
     })
